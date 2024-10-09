@@ -1,0 +1,31 @@
+syntax = "proto3";
+package ping;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "grpc-ping/grpc/ping";
+
+service PingService {
+  rpc Ping(PingRequest) returns (PingResponse);
+  rpc Stream(StreamRequest) returns (stream StreamResponse);
+}
+
+
+message PingRequest {
+  string message = 1;
+  string client_id = 2;
+}
+
+message PingResponse {
+  int32 index = 1;
+  string message = 2;
+  google.protobuf.Timestamp recieved_on = 3;
+}
+
+message StreamRequest {
+    string message = 1;
+}
+
+message StreamResponse {
+    string message = 1;
+}
